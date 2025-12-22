@@ -16,6 +16,11 @@ export type PokemonListItem = {
   url: string
 }
 
+export type PokemonListResult = {
+  items: PokemonListItem[]
+  totalCount: number
+}
+
 export type PokemonListParams = {
   limit: number
   offset: number

@@ -4,8 +4,9 @@ import * as React from "react"
 
 import i18n, {
   defaultLanguage,
+  getDirection,
   type SupportedLanguage,
-  resources,
+  supportedLanguages,
 } from "@/lib/i18n"
 import { LANGUAGE_STORAGE_KEY } from "@/constants"
 
@@ -16,8 +17,6 @@ type I18nContextValue = {
   t: typeof i18n.t
   supportedLanguages: SupportedLanguage[]
 }
-
-const supportedLanguages = Object.keys(resources) as SupportedLanguage[]
 
 const I18nContext = React.createContext<I18nContextValue | null>(null)
 
@@ -56,7 +55,7 @@ function I18nProvider({
     typeof window === "undefined" ? initialLanguage : resolveInitialLanguage()
   )
 
-  const direction = language === "ar" ? "rtl" : "ltr"
+  const direction = getDirection(language)
 
   const changeLanguage = React.useCallback((nextLanguage: SupportedLanguage) => {
     void i18n.changeLanguage(nextLanguage)

@@ -1,21 +1,12 @@
-"use client"
+import i18next from "i18next"
 
-import i18next, { type Resource, type ResourceLanguage } from "i18next"
-import ar from "@/locales/ar.json"
-import en from "@/locales/en.json"
-import fr from "@/locales/fr.json"
-
-export type SupportedLanguage = "en" | "fr" | "ar"
-
-export const defaultLanguage: SupportedLanguage = "en"
-
-const resources: Resource = {
-  en: en as ResourceLanguage,
-  fr: fr as ResourceLanguage,
-  ar: ar as ResourceLanguage,
-}
-
-const supportedLanguages = Object.keys(resources)
+import {
+  defaultLanguage,
+  getDirection,
+  resources,
+  supportedLanguages,
+  type SupportedLanguage,
+} from "./i18n.config"
 
 if (!i18next.isInitialized) {
   i18next.init({
@@ -28,5 +19,6 @@ if (!i18next.isInitialized) {
   })
 }
 
-export { resources }
+export { defaultLanguage, getDirection, resources, supportedLanguages }
+export type { SupportedLanguage }
 export default i18next
