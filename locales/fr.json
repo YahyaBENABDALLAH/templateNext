@@ -1,0 +1,86 @@
+{
+  "translation": {
+    "common": {
+      "brand": "Bank Al-Maghrib",
+      "appName": "Système de Gestion de Flotte",
+      "language": "Langue",
+      "theme": "Thème",
+      "light": "Clair",
+      "dark": "Sombre",
+      "english": "Anglais",
+      "french": "Français",
+      "arabic": "Arabe",
+      "home": "Page d’accueil"
+    },
+    "auth": {
+      "emailLabel": "Email / Matricule",
+      "emailPlaceholder": "votre.email@bkam.ma",
+      "passwordLabel": "Mot de passe",
+      "passwordPlaceholder": "********",
+      "rememberMe": "Rester connecté",
+      "forgotPassword": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "signInWithAzure": "Se connecter avec Azure AD",
+      "securityNotice": "Accès réservé au personnel autorisé de Bank Al-Maghrib. Toute tentative d'accès non autorisée sera enregistrée."
+    },
+    "otp": {
+      "title": "Authentification",
+      "subtitle": "Un code de vérification a été envoyé à votre email : ",
+      "helper": "Veuillez saisir le code à 6 chiffres",
+      "submit": "Vérifier",
+      "resendQuestion": "Vous n'avez pas reçu l'e-mail ?",
+      "resendAction": "Cliquez ici pour le renvoyer.",
+      "back": "Retour à la connexion"
+    },
+    "forgot": {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Saisissez votre email pour recevoir les instructions de réinitialisation.",
+      "emailLabel": "Email / Matricule",
+      "emailPlaceholder": "votre.email@bkam.ma",
+      "submit": "Envoyer le lien de réinitialisation",
+      "back": "Retour à la connexion"
+    },
+    "nav": {
+      "sections": {
+        "administrative": "Gestion administrative",
+        "operations": "Exploitation"
+      },
+      "newFeature1": "Nouvelle fonctionnalité 1",
+      "newFeature2": "Nouvelle fonctionnalité 2",
+      "newFeature3": "Nouvelle fonctionnalité 3",
+      "more": "Plus",
+      "main": {
+        "playground": "Bac à sable",
+        "history": "Historique",
+        "starred": "Favoris",
+        "settings": "Paramètres",
+        "models": "Modèles",
+        "genesis": "Genesis",
+        "explorer": "Explorer",
+        "quantum": "Quantum",
+        "documentation": "Documentation",
+        "introduction": "Introduction",
+        "getStarted": "Pour commencer",
+        "tutorials": "Tutoriels",
+        "changelog": "Journal des modifications",
+        "general": "Général",
+        "team": "Équipe",
+        "billing": "Facturation",
+        "limits": "Limites"
+      },
+      "projects": {
+        "designEngineering": "Ingénierie de conception",
+        "salesMarketing": "Ventes et marketing",
+        "travel": "Voyages"
+      },
+      "actions": {
+        "viewProject": "Voir le projet",
+        "shareProject": "Partager le projet",
+        "deleteProject": "Supprimer le projet"
+      }
+    },
+    "footer": {
+      "copyright": "Bank Al-Maghrib - Gestion de flotte"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "translation": {
+    "common": {
+      "brand": "Bank Al-Maghrib",
+      "appName": "Fleet Management System",
+      "language": "Language",
+      "theme": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "english": "English",
+      "french": "French",
+      "arabic": "Arabic",
+      "home": "Home Page"
+    },
+    "auth": {
+      "emailLabel": "Email / Employee ID",
+      "emailPlaceholder": "your.email@bkam.ma",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "********",
+      "rememberMe": "Keep me signed in",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "signInWithAzure": "Sign in with Azure AD",
+      "securityNotice": "Access is restricted to authorized Bank Al-Maghrib staff. Any unauthorized attempts will be logged."
+    },
+    "otp": {
+      "title": "Authentication",
+      "subtitle": "A verification code was sent to your email: ",
+      "helper": "Please enter the 6-digit code",
+      "submit": "Verify",
+      "resendQuestion": "Didn't receive the email?",
+      "resendAction": "Resend the code",
+      "back": "Back to login"
+    },
+    "forgot": {
+      "title": "Reset password",
+      "subtitle": "Enter your email to receive reset instructions.",
+      "emailLabel": "Email / Employee ID",
+      "emailPlaceholder": "your.email@bkam.ma",
+      "submit": "Send reset link",
+      "back": "Back to login"
+    },
+    "nav": {
+      "sections": {
+        "administrative": "Administrative Management",
+        "operations": "Operations"
+      },
+      "newFeature1": "New Feature 1",
+      "newFeature2": "New Feature 2",
+      "newFeature3": "New Feature 3",
+      "more": "More",
+      "main": {
+        "playground": "Playground",
+        "history": "History",
+        "starred": "Starred",
+        "settings": "Settings",
+        "models": "Models",
+        "genesis": "Genesis",
+        "explorer": "Explorer",
+        "quantum": "Quantum",
+        "documentation": "Documentation",
+        "introduction": "Introduction",
+        "getStarted": "Get Started",
+        "tutorials": "Tutorials",
+        "changelog": "Changelog",
+        "general": "General",
+        "team": "Team",
+        "billing": "Billing",
+        "limits": "Limits"
+      },
+      "projects": {
+        "designEngineering": "Design Engineering",
+        "salesMarketing": "Sales & Marketing",
+        "travel": "Travel"
+      },
+      "actions": {
+        "viewProject": "View project",
+        "shareProject": "Share project",
+        "deleteProject": "Delete project"
+      }
+    },
+    "footer": {
+      "copyright": "Bank Al-Maghrib - Fleet Management"
+    }
+  }
+}

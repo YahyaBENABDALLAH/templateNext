@@ -1,0 +1,86 @@
+{
+  "translation": {
+    "common": {
+      "brand": "بنك المغرب",
+      "appName": "نظام إدارة الأسطول",
+      "language": "اللغة",
+      "theme": "المظهر",
+      "light": "فاتح",
+      "dark": "داكن",
+      "english": "الإنجليزية",
+      "french": "الفرنسية",
+      "arabic": "العربية",
+      "home": "الصفحة الرئيسية"
+    },
+    "auth": {
+      "emailLabel": "البريد الإلكتروني / الرقم الوظيفي",
+      "emailPlaceholder": "your.email@bkam.ma",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "********",
+      "rememberMe": "تذكرني",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "submit": "تسجيل الدخول",
+      "signInWithAzure": "تسجيل الدخول عبر Azure AD",
+      "securityNotice": "الوصول مخصص لموظفي بنك المغرب المصرح لهم فقط. سيتم تسجيل أي محاولة دخول غير مصرح بها."
+    },
+    "otp": {
+      "title": "المصادقة",
+      "subtitle": "تم إرسال رمز التحقق إلى بريدك الإلكتروني: ",
+      "helper": "يرجى إدخال الرمز المكون من 6 أرقام",
+      "submit": "تحقق",
+      "resendQuestion": "لم يصلك البريد الإلكتروني؟",
+      "resendAction": "أعد إرسال الرمز",
+      "back": "العودة إلى تسجيل الدخول"
+    },
+    "forgot": {
+      "title": "إعادة تعيين كلمة المرور",
+      "subtitle": "أدخل بريدك الإلكتروني لإرسال تعليمات إعادة التعيين.",
+      "emailLabel": "البريد الإلكتروني / الرقم الوظيفي",
+      "emailPlaceholder": "your.email@bkam.ma",
+      "submit": "إرسال رابط إعادة التعيين",
+      "back": "العودة لتسجيل الدخول"
+    },
+    "nav": {
+      "sections": {
+        "administrative": "إدارة الشؤون الإدارية",
+        "operations": "العمليات"
+      },
+      "newFeature1": "الميزة الجديدة 1",
+      "newFeature2": "الميزة الجديدة 2",
+      "newFeature3": "الميزة الجديدة 3",
+      "more": "المزيد",
+      "main": {
+        "playground": "منطقة تجريب",
+        "history": "السجل",
+        "starred": "المفضلة",
+        "settings": "الإعدادات",
+        "models": "النماذج",
+        "genesis": "جينيسيس",
+        "explorer": "المستكشف",
+        "quantum": "كوانتوم",
+        "documentation": "التوثيق",
+        "introduction": "مقدمة",
+        "getStarted": "البدء",
+        "tutorials": "الدروس التعليمية",
+        "changelog": "سجل التغييرات",
+        "general": "عام",
+        "team": "الفريق",
+        "billing": "الفوترة",
+        "limits": "الحدود"
+      },
+      "projects": {
+        "designEngineering": "هندسة التصميم",
+        "salesMarketing": "المبيعات والتسويق",
+        "travel": "السفر"
+      },
+      "actions": {
+        "viewProject": "عرض المشروع",
+        "shareProject": "مشاركة المشروع",
+        "deleteProject": "حذف المشروع"
+      }
+    },
+    "footer": {
+      "copyright": "بنك المغرب - إدارة الأسطول"
+    }
+  }
+}

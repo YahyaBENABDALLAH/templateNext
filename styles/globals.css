@@ -1,0 +1,792 @@
+/* ==========================================================================
+   Global styles & design tokens
+   - Primitives (palette) and semantic tokens for light/dark themes
+   - Tailwind token mapping via @theme inline
+   ========================================================================== */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *),&:is(.dark *));
+
+/* Tailwind token mapping
+   These variables are consumed by Tailwind/shadcn via the @theme directive.
+*/
+@theme inline {
+  /* Color tokens: Tailwind expects --color-*; we map them to semantic tokens. */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-tertiary: var(--gray-light-600);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-disabled: var(--disabled);
+  --color-disabled-foreground: var(--disabled-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-brand-solid-hover: var(--bg-brand-solid_hover);
+
+  /* Typography tokens */
+  --font-inter: var(--font-family-inter);
+
+  /* Radius tokens */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Type scale tokens: Tailwind expects --text-* (+ line-height companions). */
+  --text-xs: var(--font-size-xs);
+  --text-xs--line-height: var(--line-height-normal);
+  --text-sm: var(--font-size-sm);
+  --text-sm--line-height: var(--line-height-normal);
+  --text-base: var(--font-size-base);
+  --text-base--line-height: var(--line-height-base);
+  --text-lg: var(--font-size-lg);
+  --text-lg--line-height: var(--line-height-base);
+  --text-xl: var(--font-size-xl);
+  --text-xl--line-height: var(--line-height-snug);
+  --text-display-xs: var(--font-size-display-xs);
+  --text-display-xs--line-height: var(--line-height-heading);
+  --text-display-sm: var(--font-size-display-sm);
+  --text-display-sm--line-height: var(--line-height-heading);
+  --text-display-md: var(--font-size-display-md);
+  --text-display-md--line-height: var(--line-height-heading);
+  --text-display-lg: var(--font-size-display-lg);
+  --text-display-lg--line-height: var(--line-height-heading);
+  --text-display-xl: var(--font-size-display-xl);
+  --text-display-xl--line-height: var(--line-height-heading);
+  --text-display-2xl: var(--font-size-display-2xl);
+  --text-display-2xl--line-height: var(--line-height-heading);
+}
+
+/* Theme tokens */
+:root {
+  /* ==========================================================================
+     Primitives (palette) — do not use directly in components when possible
+     ========================================================================== */
+
+  /* Base */
+  --base-white: #ffffff;
+  --base-black: #000000;
+
+  /* Neutral (light) */
+  --gray-light-25: #fdfdfd;
+  --gray-light-50: #fafafa;
+  --gray-light-100: #f5f5f5;
+  --gray-light-200: #e9eaeb;
+  --gray-light-300: #d5d7da;
+  --gray-light-400: #a4a7ae;
+  --gray-light-500: #717680;
+  --gray-light-600: #535862;
+  --gray-light-700: #414651;
+  --gray-light-800: #252b37;
+  --gray-light-900: #181d27;
+  --gray-light-950: #0a0d12;
+
+  /* Neutral (dark) — kept here as primitives used by the .dark theme tokens */
+  --gray-dark-25: #fafafa;
+  --gray-dark-50: #f7f7f7;
+  --gray-dark-100: #f0f0f1;
+  --gray-dark-200: #ececed;
+  --gray-dark-300: #cecfd2;
+  --gray-dark-400: #94979c;
+  --gray-dark-500: #85888e;
+  --gray-dark-600: #61656c;
+  --gray-dark-700: #373a41;
+  --gray-dark-800: #22262f;
+  --gray-dark-900: #13161b;
+  --gray-dark-950: #0c0e12;
+
+  /* Brand */
+  --brand-25: #f8f7f1;
+  --brand-50: #f8f5ee;
+  --brand-100: #efe7d2;
+  --brand-200: #e0d0a8;
+  --brand-300: #ceb276;
+  --brand-400: #c5a05f;
+  --brand-500: #b08342;
+  --brand-600: #976837;
+  --brand-700: #7a4f2e;
+  --brand-800: #67412c;
+  --brand-900: #59382a;
+  --brand-950: #331d15;
+
+  /* Feedback palettes */
+  /* Error */
+  --error-25: #fffbfa;
+  --error-50: #fef3f2;
+  --error-100: #fee4e2;
+  --error-200: #fecdca;
+  --error-300: #fda29b;
+  --error-400: #f97066;
+  --error-500: #f04438;
+  --error-600: #d92d20;
+  --error-700: #b42318;
+  --error-800: #912018;
+  --error-900: #7a271a;
+  --error-950: #55160c;
+
+  /* Warning */
+  --warning-25: #fffcf5;
+  --warning-50: #fffaeb;
+  --warning-100: #fef0c7;
+  --warning-200: #fedf89;
+  --warning-300: #fec84b;
+  --warning-400: #fdb022;
+  --warning-500: #f79009;
+  --warning-600: #dc6803;
+  --warning-700: #b54708;
+  --warning-800: #93370d;
+  --warning-900: #7a2e0e;
+  --warning-950: #4e1d09;
+
+  /* Success */
+  --success-25: #f6fef9;
+  --success-50: #ecfdf3;
+  --success-100: #dcfae6;
+  --success-200: #abefc6;
+  --success-300: #75e0a7;
+  --success-400: #47cd89;
+  --success-500: #17b26a;
+  --success-600: #079455;
+  --success-700: #067647;
+  --success-800: #085d3a;
+  --success-900: #074d31;
+  --success-950: #053321;
+
+  /* ==========================================================================
+     Semantic tokens (light theme) — use these in UI components
+     ========================================================================== */
+
+  /* Status aliases */
+  --success: var(--success-600);
+  --success-foreground: var(--base-white);
+  --warning: var(--warning-600);
+  --warning-foreground: var(--base-white);
+  --danger-foreground: var(--text-primary_on-brand);
+  --disabled: var(--bg-disabled);
+  --disabled-foreground: var(--text-disabled);
+
+  /* Radius */
+  --radius: 0.625rem;
+
+  /* Typography */
+  /* Families */
+  --font-family-inter: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  --font-display: var(--font-family-sans);
+
+  /* Sizes */
+  --font-size-root: 100%;
+  --font-size-xs: clamp(0.55rem, 0.14vw + 0.5rem, 0.65rem);
+  --font-size-sm: clamp(0.75rem, 0.18vw + 0.7rem, 0.825rem);
+  --font-size-base: clamp(0.88rem, 0.22vw + 0.82rem, 0.98rem);
+  --font-size-lg: clamp(1.02rem, 0.28vw + 0.93rem, 1.15rem);
+  --font-size-xl: clamp(1.18rem, 0.35vw + 1.07rem, 1.3rem);
+  --font-size-display-xs: clamp(1.5rem, 0.55vw + 1.25rem, 1.8rem);
+  --font-size-display-sm: clamp(1.15rem, 0.8vw + 1.5rem, 2.25rem);
+  --font-size-display-md: clamp(2.1rem, 1vw + 1.6rem, 2.65rem);
+  --font-size-display-lg: clamp(2.45rem, 1.2vw + 1.8rem, 3.2rem);
+  --font-size-display-xl: clamp(2.7rem, 1.45vw + 2.05rem, 3.7rem);
+  --font-size-display-2xl: clamp(3rem, 1.7vw + 2.4rem, 4rem);
+  --font-size-code: clamp(0.82rem, 0.12vw + 0.78rem, 0.85rem);
+
+  /* Line heights */
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.4;
+  --line-height-normal: 1.55;
+  --line-height-base: var(--line-height-normal);
+  --line-height-heading: var(--line-height-tight);
+  --line-height-code: var(--line-height-normal);
+
+  /* Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+
+  /* Heading aliases */
+  --font-size-h1: var(--font-size-display-md);
+  --font-size-h2: var(--font-size-display-sm);
+  --font-size-h3: var(--font-size-display-xs);
+  --font-size-h4: var(--font-size-xl);
+  --font-size-h5: var(--font-size-lg);
+  --font-size-h6: var(--font-size-base);
+
+  /* Background tokens */
+  --bg-primary: var(--base-white);
+  --bg-primary_alt: var(--gray-light-50);
+  --bg-primary_hover: var(--gray-light-50);
+  --bg-primary-solid: var(--gray-light-100);
+  --bg-secondary: var(--gray-light-50);
+  --bg-secondary_alt: var(--gray-light-50);
+  --bg-secondary_hover: var(--gray-light-100);
+  --bg-secondary_subtle: var(--gray-light-25);
+  --bg-secondary-solid: var(--gray-light-600);
+  --bg-tertiary: var(--gray-light-100);
+  --bg-quaternary: var(--gray-light-200);
+  --bg-active: var(--gray-light-50);
+  --bg-disabled: var(--gray-light-100);
+  --bg-disabled_subtle: var(--gray-light-50);
+  --bg-brand-secondary: var(--brand-100);
+  --bg-brand-solid: var(--brand-400);
+  --bg-brand-solid_hover: var(--brand-600);
+  --bg-brand-section: var(--brand-400);
+  --bg-brand-section_subtle: var(--brand-600);
+  --bg-error-primary: var(--error-50);
+  --bg-error-secondary: var(--error-100);
+  --bg-error-solid: var(--error-600);
+  --bg-warning-primary: var(--warning-50);
+  --bg-warning-secondary: var(--warning-100);
+  --bg-warning-solid: var(--warning-600);
+  --bg-success-primary: var(--success-50);
+  --bg-success-secondary: var(--success-100);
+  --bg-success-solid: var(--success-600);
+
+  /* Text tokens */
+  --text-white: var(--base-white);
+  --text-disabled: var(--gray-light-500);
+  --text-placeholder: var(--gray-light-500);
+  --text-placeholder_subtle: var(--gray-light-300);
+  --text-primary: hsl(222.2 47.4% 11.2%);
+  --text-primary_on-brand: var(--base-white);
+  --text-secondary: hsl(215.4 16.3% 46.9%);
+  --text-secondary_hover: var(--text-secondary);
+  --text-secondary_on-brand: var(--brand-100);
+  --text-muted: hsl(215.4 16.3% 65%);
+  --text-tertiary: var(--text-muted);
+  --text-tertiary_hover: var(--text-secondary);
+  --text-tertiary_on-brand: var(--text-muted);
+  --text-brand-primary: var(--brand-800);
+  --text-brand-secondary: var(--brand-600);
+  --text-brand-secondary_hover: var(--brand-700);
+  --text-brand-tertiary: var(--brand-500);
+  --text-brand-tertiary_alt: var(--brand-500);
+  --text-error-primary: var(--error-600);
+  --text-error-primary_hover: var(--error-700);
+  --text-warning-primary: var(--warning-600);
+  --text-success-primary: var(--success-600);
+
+  /* Foreground tokens */
+  --fg-primary: var(--text-primary);
+  --fg-secondary: var(--text-secondary);
+  --fg-secondary_hover: var(--text-secondary_hover);
+  --fg-tertiary: var(--text-tertiary);
+  --fg-tertiary_hover: var(--text-tertiary_hover);
+  --fg-quaternary: var(--gray-light-400);
+  --fg-quaternary_hover: var(--gray-light-500);
+  --fg-white: var(--base-white);
+  --fg-disabled: var(--gray-light-400);
+  --fg-disabled_subtle: var(--gray-light-300);
+  --fg-brand-primary: var(--brand-400);
+  --fg-brand-primary_alt: var(--brand-400);
+  --fg-brand-secondary: var(--brand-500);
+  --fg-brand-secondary_alt: var(--brand-500);
+  --fg-error-primary: var(--error-600);
+  --fg-error-secondary: var(--error-500);
+  --fg-warning-primary: var(--warning-600);
+  --fg-warning-secondary: var(--warning-500);
+  --fg-success-primary: var(--success-600);
+  --fg-success-secondary: var(--success-500);
+
+  /* Component tokens (Tailwind/Shadcn/Radix) */
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+  --card: var(--bg-secondary);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-secondary_alt);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--brand-400);
+  --primary-foreground: var(--text-primary_on-brand);
+  --secondary: var(--bg-secondary);
+  --secondary-foreground: var(--text-secondary);
+  --muted: var(--bg-secondary_subtle);
+  --muted-foreground: var(--text-muted);
+  --accent: var(--bg-brand-secondary);
+  --accent-foreground: var(--text-brand-primary);
+  --danger: var(--error-600);
+  --danger-secondary: var(--error-100);
+  --border: var(--gray-light-200);
+  --input: var(--gray-light-200);
+  --ring: var(--brand-400);
+  --chart-1: var(--brand-500);
+  --chart-2: var(--warning-500);
+  --chart-3: var(--success-500);
+  --chart-4: var(--error-500);
+  --chart-5: var(--brand-700);
+  --sidebar: var(--base-white);
+  --sidebar-foreground: var(--text-primary);
+  --sidebar-primary: var(--brand-700);
+  --sidebar-primary-foreground: var(--text-primary_on-brand);
+  --sidebar-accent: var(--bg-secondary);
+  --sidebar-accent-foreground: var(--text-primary);
+  --sidebar-border: var(--gray-light-200);
+  --sidebar-ring: var(--brand-400);
+}
+
+.dark {
+  /* ==========================================================================
+     Semantic tokens (dark theme)
+     ========================================================================== */
+
+  /* Background tokens */
+  --bg-primary: var(--gray-dark-950);
+  --bg-primary_alt: var(--gray-dark-900);
+  --bg-primary_hover: var(--gray-dark-800);
+  --bg-primary-solid: var(--gray-dark-800);
+  --bg-secondary: var(--gray-dark-900);
+  --bg-secondary_alt: var(--bg-primary);
+  --bg-secondary_hover: var(--gray-dark-800);
+  --bg-secondary_subtle: var(--gray-dark-900);
+  --bg-secondary-solid: var(--gray-dark-600);
+  --bg-tertiary: var(--gray-dark-800);
+  --bg-quaternary: var(--gray-dark-700);
+  --bg-active: var(--gray-dark-800);
+  --bg-disabled: var(--gray-dark-800);
+  --bg-disabled_subtle: var(--gray-dark-900);
+  --bg-brand-secondary: var(--brand-400);
+  --bg-brand-solid: var(--brand-400);
+  --bg-brand-solid_hover: var(--brand-500);
+  --bg-brand-section: var(--bg-secondary);
+  --bg-brand-section_subtle: var(--bg-primary);
+  --bg-error-primary: var(--error-950);
+  --bg-error-secondary: var(--error-600);
+  --bg-error-solid: var(--error-600);
+  --bg-warning-primary: var(--warning-950);
+  --bg-warning-secondary: var(--warning-600);
+  --bg-warning-solid: var(--warning-600);
+  --bg-success-primary: var(--success-950);
+  --bg-success-secondary: var(--success-600);
+  --bg-success-solid: var(--success-600);
+
+  /* Status aliases */
+  --success: var(--success-500);
+  --success-foreground: var(--base-white);
+  --warning: var(--warning-500);
+  --warning-foreground: var(--base-white);
+  --danger-foreground: var(--text-primary_on-brand);
+  --disabled: var(--bg-disabled);
+  --disabled-foreground: var(--text-disabled);
+
+  /* Text tokens */
+  --text-white: var(--base-white);
+  --text-disabled: var(--gray-dark-500);
+  --text-placeholder: var(--gray-dark-500);
+  --text-placeholder_subtle: var(--gray-dark-700);
+  --text-primary: hsl(210 40% 98%);
+  --text-primary_on-brand: var(--text-primary);
+  --text-secondary: hsl(215 20.2% 65.1%);
+  --text-secondary_hover: var(--text-secondary);
+  --text-secondary_on-brand: var(--text-secondary);
+  --text-muted: hsl(215 20.2% 55%);
+  --text-tertiary: var(--text-muted);
+  --text-tertiary_hover: var(--text-secondary);
+  --text-tertiary_on-brand: var(--text-muted);
+  --text-brand-primary: var(--gray-dark-50);
+  --text-brand-secondary: var(--gray-dark-300);
+  --text-brand-secondary_hover: var(--gray-dark-200);
+  --text-brand-tertiary: var(--gray-dark-400);
+  --text-brand-tertiary_alt: var(--gray-dark-50);
+  --text-error-primary: var(--error-400);
+  --text-error-primary_hover: var(--error-300);
+  --text-warning-primary: var(--warning-400);
+  --text-success-primary: var(--success-400);
+
+  /* Foreground tokens */
+  --fg-primary: var(--text-primary);
+  --fg-secondary: var(--text-secondary);
+  --fg-secondary_hover: var(--text-secondary_hover);
+  --fg-tertiary: var(--text-tertiary);
+  --fg-tertiary_hover: var(--text-tertiary_hover);
+  --fg-quaternary: var(--gray-dark-600);
+  --fg-quaternary_hover: var(--gray-dark-500);
+  --fg-white: var(--base-white);
+  --fg-disabled: var(--gray-dark-500);
+  --fg-disabled_subtle: var(--gray-dark-600);
+  --fg-brand-primary: var(--brand-300);
+  --fg-brand-primary_alt: var(--gray-dark-300);
+  --fg-brand-secondary: var(--brand-400);
+  --fg-brand-secondary_alt: var(--gray-dark-600);
+  --fg-error-primary: var(--error-500);
+  --fg-error-secondary: var(--error-400);
+  --fg-warning-primary: var(--warning-500);
+  --fg-warning-secondary: var(--warning-400);
+  --fg-success-primary: var(--success-500);
+  --fg-success-secondary: var(--success-400);
+
+  /* Component tokens (Tailwind/Shadcn/Radix) */
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+  --card: var(--bg-secondary);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-secondary_alt);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--brand-400);
+  --primary-foreground: var(--text-primary_on-brand);
+  --secondary: var(--bg-secondary);
+  --secondary-foreground: var(--text-secondary);
+  --muted: var(--bg-secondary_subtle);
+  --muted-foreground: var(--text-muted);
+  --accent: var(--brand-400);
+  --accent-foreground: var(--text-brand-primary);
+  --danger: var(--error-400);
+  --danger-secondary: var(--error-300);
+  --border: var(--gray-dark-800);
+  --input: var(--gray-dark-800);
+  --ring: var(--brand-300);
+  --chart-1: var(--brand-400);
+  --chart-2: var(--warning-500);
+  --chart-3: var(--success-500);
+  --chart-4: var(--error-500);
+  --chart-5: var(--brand-700);
+  --sidebar: var(--bg-secondary);
+  --sidebar-foreground: var(--text-primary);
+  --sidebar-primary: var(--brand-300);
+  --sidebar-primary-foreground: var(--text-primary_on-brand);
+  --sidebar-accent: var(--bg-secondary);
+  --sidebar-accent-foreground: var(--text-primary);
+  --sidebar-border: var(--gray-dark-800);
+  --sidebar-ring: var(--brand-300);
+}
+
+/* ==========================================================================
+   Base styles
+   ========================================================================== */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    font-family: var(--font-family-inter);
+    font-size: var(--font-size-root);
+    line-height: var(--line-height-base);
+    font-weight: var(--font-weight-regular);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-background;
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    font-weight: var(--font-weight-regular);
+  }
+
+  p,
+  div {
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    font-weight: var(--font-weight-regular);
+    margin: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-heading);
+    margin: 0;
+    color: inherit;
+  }
+
+  h1 {
+    font-size: var(--font-size-h1);
+  }
+
+  h2 {
+    font-size: var(--font-size-h2);
+  }
+
+  h3 {
+    font-size: var(--font-size-h3);
+  }
+
+  h4 {
+    font-size: var(--font-size-h4);
+  }
+
+  h5 {
+    font-size: var(--font-size-h5);
+  }
+
+  h6 {
+    font-size: var(--font-size-h6);
+  }
+
+  a {
+    color: inherit;
+    font: inherit;
+    text-decoration: none;
+  }
+
+  code,
+  pre {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-code);
+    line-height: var(--line-height-code);
+  }
+
+  pre {
+    margin: 0;
+  }
+  /* Checkbox – theme-aligned  */
+
+  input[type="checkbox"] {
+    accent-color: var(--brand-400);
+  }
+
+  input[type="checkbox"]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--brand-400), 0 0 0 2px #7b2424cd;
+  }
+
+  input[type="checkbox"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+
+@layer components {
+  .shortcut  {
+  position: absolute;
+   
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 2px 6px;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+  background: var(--brand-600);
+ 
+  border-radius: 4px;
+  pointer-events: none;
+}
+  .btn {
+    @apply inline-flex truncate items-center whitespace-nowrap rounded-(--radius-md) border border-transparent bg-transparent font-sans text-sm font-semibold leading-6 shadow-sm ring-offset-background transition-[background-color,border-color,color,box-shadow,transform] duration-150 cursor-pointer [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 active:translate-y-[1px] disabled:pointer-events-none data-[disabled=true]:pointer-events-none disabled:bg-disabled disabled:text-disabled-foreground disabled:border-disabled disabled:shadow-none disabled:opacity-70 data-[disabled=true]:bg-disabled data-[disabled=true]:text-disabled-foreground data-[disabled=true]:border-disabled data-[disabled=true]:shadow-none data-[disabled=true]:opacity-70;
+  }
+
+  .btn-xs {
+    @apply h-8 px-3 text-xs;
+  }
+
+  .btn-sm {
+    @apply h-9 px-3;
+  }
+
+  .btn-md {
+    @apply h-10 px-4;
+  }
+
+  .btn-lg {
+    @apply h-11 px-5 text-base;
+  }
+
+  .btn-xl {
+    @apply h-12 px-6 text-base;
+  }
+
+  .btn-icon {
+    @apply h-8 px-2;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground ring-primary;
+  }
+
+  .btn-primary:hover:not(:disabled):not([data-disabled="true"]) {
+    @apply bg-brand-solid-hover;
+  }
+
+  .btn-primary:focus-visible {
+    @apply ring-primary;
+  }
+
+  .btn-secondary {
+    @apply border border-border bg-secondary text-secondary-foreground ring-secondary;
+  }
+
+  .btn-secondary:hover:not(:disabled):not([data-disabled="true"]) {
+    @apply bg-(--gray-light-100) dark:bg-(--gray-dark-800);
+  }
+
+  .btn-secondary:focus-visible {
+    @apply ring-primary;
+  }
+
+  .btn-muted {
+    @apply border border-transparent bg-muted text-muted-foreground  shadow-none;
+  }
+
+  .btn-muted:hover:not(:disabled):not([data-disabled="true"]) {
+    @apply bg-(--gray-light-100) dark:bg-(--gray-dark-800);
+  }
+
+  .btn-muted:focus-visible {
+    @apply ring-primary;
+  }
+
+  .btn-success {
+    @apply bg-success text-success-foreground ring-success;
+  }
+
+  .btn-success:hover:not(:disabled):not([data-disabled="true"]) {
+    @apply bg-success/90;
+  }
+
+  .btn-success:focus-visible {
+    @apply ring-success;
+  }
+
+  .btn-warning {
+    @apply bg-warning text-warning-foreground ring-warning;
+  }
+
+  .btn-warning:hover:not(:disabled):not([data-disabled="true"]) {
+    @apply bg-warning/90;
+  }
+
+  .btn-warning:focus-visible {
+    @apply ring-warning;
+  }
+
+  .btn-danger {
+    @apply bg-danger text-danger-foreground ring-danger;
+  }
+
+  .btn-danger:hover:not(:disabled):not([data-disabled="true"]) {
+    @apply bg-danger/90;
+  }
+
+  .btn-danger:focus-visible {
+    @apply ring-danger;
+  }
+
+  .btn-outline {
+    @apply border border-border bg-transparent  ring-border shadow-none;
+  }
+
+  .btn-outline:hover:not(:disabled):not([data-disabled="true"]) {
+    @apply bg-muted;
+  }
+
+  .btn-outline:focus-visible {
+    @apply ring-border;
+  }
+
+  .btn-link {
+    @apply border-none bg-transparent p-0 text-primary shadow-none ring-transparent underline-offset-4 focus-visible:ring-0 focus-visible:underline;
+  }
+
+  .btn-link:hover:not(:disabled):not([data-disabled="true"]) {
+    @apply text-primary/80 underline;
+  }
+
+  .btn-disabled {
+    @apply border border-disabled bg-disabled text-disabled-foreground shadow-none ring-transparent pointer-events-none;
+  }
+
+  .badge {
+    @apply font-normal inline-flex items-center gap-2 rounded-md border border-transparent bg-muted px-2 py-0.5 text-xs whitespace-nowrap align-middle ring-border ring-offset-background transition-[background-color,border-color,color,box-shadow] duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 shadow-xs;
+  }
+
+  .badge-xs {
+    @apply gap-1 px-2 py-0.5 text-[10px];
+  }
+
+  .badge-sm {
+    @apply gap-1.5 px-2.5 py-1 text-[11px];
+  }
+
+  .badge-md {
+    @apply gap-2 px-3 py-1.5 text-xs;
+  }
+
+  .badge-lg {
+    @apply gap-2 px-3.5 py-1.5 text-sm;
+  }
+
+  .badge-neutral {
+    @apply bg-muted/20 text-tertiary border-border;
+  }
+
+  .badge-brand {
+    @apply bg-primary/20 text-brand-solid-hover border-primary/40;
+  }
+
+  .badge-info {
+    @apply bg-indigo-600/20 text-indigo-400 border-indigo-400;
+  }
+
+  .badge-success {
+    @apply bg-success/20 text-success border-success/40;
+  }
+
+  .badge-warning {
+    @apply bg-warning/20 text-warning border-warning/40;
+  }
+
+  .badge-danger {
+    @apply bg-danger/20 text-danger border-danger/40;
+  }
+
+  .badge-icon {
+    @apply inline-flex shrink-0 items-center justify-center;
+  }
+
+  .badge-icon > svg {
+    @apply pointer-events-none;
+  }
+
+  .badge-text {
+    @apply leading-[1.2];
+  }
+}
