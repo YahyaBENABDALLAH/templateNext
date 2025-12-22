@@ -1,6 +1,7 @@
 import type {
   PokemonApiListResponse,
   PokemonListItem,
+  PokemonListResult,
 } from "../domain/pokemon.types"
 
 // The API list item doesn't include an id, so extract it from the URL.
@@ -13,10 +14,15 @@ function extractPokemonKey(url: string) {
 
 export function mapPokemonListResponse(
   response: PokemonApiListResponse
-): PokemonListItem[] {
-  return response.results.map((item) => ({
+): PokemonListResult {
+  const items: PokemonListItem[] = response.results.map((item) => ({
     key: extractPokemonKey(item.url),
     name: item.name,
     url: item.url,
   }))
+
+  return {
+    items,
+    totalCount: response.count,
+  }
 }

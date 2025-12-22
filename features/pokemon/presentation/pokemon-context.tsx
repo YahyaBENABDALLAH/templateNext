@@ -9,6 +9,7 @@ import {
   DEFAULT_POKEMON_LIST_PARAMS,
   type PokemonListFilters,
   type PokemonListItem,
+  type PokemonListResult,
 } from "../domain/pokemon.types"
 import { applyPokemonFilters } from "../application/pokemon.filters"
 import { getPokemonListQueryOptions } from "../application/pokemon.queries"
@@ -36,7 +37,9 @@ function PokemonProvider({ children }: { children: React.ReactNode }) {
   const debouncedSearch = useDebouncedValue(filters.search, 300)
 
   const query = useQuery(getPokemonListQueryOptions(DEFAULT_POKEMON_LIST_PARAMS))
-  const rawItems = query.data ?? []
+  const data: PokemonListResult | undefined = query.data
+  const totalCount = data?.totalCount ?? 0
+  const rawItems = data?.items ?? []
 
   const items = React.useMemo(() => {
     return applyPokemonFilters(rawItems, {
@@ -62,7 +65,7 @@ function PokemonProvider({ children }: { children: React.ReactNode }) {
     () => ({
       items,
       filters,
-      totalCount: rawItems.length,
+      totalCount,
       filteredCount: items.length,
       isLoading: query.isLoading,
       isFetching: query.isFetching,
@@ -73,7 +76,7 @@ function PokemonProvider({ children }: { children: React.ReactNode }) {
     [
       items,
       filters,
-      rawItems.length,
+      totalCount,
       query.isLoading,
       query.isFetching,
       error,
