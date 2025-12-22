@@ -3,7 +3,7 @@ import type {
   PokemonListFilters,
   PokemonListItem,
   PokemonSortKey,
-} from "../domain/pokemon.types"
+} from "@/types/pokemon.types"
 
 function normalize(value: string) {
   return value.trim().toLowerCase()

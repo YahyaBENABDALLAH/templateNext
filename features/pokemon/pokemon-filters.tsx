@@ -17,8 +17,8 @@ import {
 import type {
   PokemonSortKey,
   SortDirection,
-} from "../domain/pokemon.types"
-import { usePokemonTable } from "./pokemon-context"
+} from "@/types/pokemon.types"
+import { usePokemonTable } from "../../context/pokemon-context"
 
 const SORT_OPTIONS: { value: PokemonSortKey; label: string }[] = [
   { value: "name", label: "Name" },

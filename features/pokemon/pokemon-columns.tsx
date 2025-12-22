@@ -2,10 +2,9 @@
 
 import Link from "next/link"
 import { ColumnDef } from "@tanstack/react-table"
-
 import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
-import type { PokemonListItem } from "../domain/pokemon.types"
+import type { PokemonListItem } from "@/types/pokemon.types"
 
 function formatName(name: string) {
   return name.charAt(0).toUpperCase() + name.slice(1)

@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useQuery } from "@tanstack/react-query"
-
 import { useDebouncedValue } from "@/hooks/use-debounced-value"
 import {
   DEFAULT_POKEMON_LIST_FILTERS,
@@ -10,9 +9,9 @@ import {
   type PokemonListFilters,
   type PokemonListItem,
   type PokemonListResult,
-} from "../domain/pokemon.types"
-import { applyPokemonFilters } from "../application/pokemon.filters"
-import { getPokemonListQueryOptions } from "../application/pokemon.queries"
+} from "@/types/pokemon.types"
+import { getPokemonListQueryOptions } from "@/services/pokemon/pokemon.queries"
+import { applyPokemonFilters } from "@/services/pokemon/pokemon.filters"
 
 type PokemonContextValue = {
   items: PokemonListItem[]
@@ -46,7 +45,7 @@ function PokemonProvider({ children }: { children: React.ReactNode }) {
       ...filters,
       search: debouncedSearch,
     })
-  }, [rawItems, filters.sortDirection, filters.sortKey, debouncedSearch])
+  }, [rawItems, filters, debouncedSearch])
 
   const updateFilters = React.useCallback(
     (next: Partial<PokemonListFilters>) => {

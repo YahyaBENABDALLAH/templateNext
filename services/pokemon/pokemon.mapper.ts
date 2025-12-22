@@ -2,9 +2,8 @@ import type {
   PokemonApiListResponse,
   PokemonListItem,
   PokemonListResult,
-} from "../domain/pokemon.types"
+} from "@/types/pokemon.types"
 
-// The API list item doesn't include an id, so extract it from the URL.
 const KEY_MATCHER = /\/pokemon\/(\d+)\/?$/
 
 function extractPokemonKey(url: string) {

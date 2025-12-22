@@ -3,7 +3,7 @@
 import { DataTable } from "@/components/ui/data-table"
 import { pokemonColumns } from "./pokemon-columns"
 import { PokemonFilters } from "./pokemon-filters"
-import { usePokemonTable } from "./pokemon-context"
+import { usePokemonTable } from "../../context/pokemon-context"
 
 export function PokemonTable() {
   const { items, isLoading, error } = usePokemonTable()

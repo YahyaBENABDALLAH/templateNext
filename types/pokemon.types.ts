@@ -37,7 +37,7 @@ export type PokemonListFilters = {
 }
 
 export const DEFAULT_POKEMON_LIST_PARAMS: PokemonListParams = {
-  limit: 50,
+  limit: 150,
   offset: 0,
 }
 
@@ -45,4 +45,7 @@ export const DEFAULT_POKEMON_LIST_FILTERS: PokemonListFilters = {
   search: "",
   sortKey: "name",
   sortDirection: "asc",
+}
+export const pokemonQueryKeys = {
+  list: (params: PokemonListParams) => ["pokemon", "list", params] as const,
 }

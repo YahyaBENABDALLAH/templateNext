@@ -1,6 +1,6 @@
 import { DashboardOverview } from "@/components/features/dashboard/dashboard-overview";
 import { DataTable } from "@/components/ui/data-table";
-import { columns } from "./table/columns";
+import { columns } from "./pokemon/columns";
 import { Button } from "@/components/ui/button";
 import { Download, Filter, Plus, Search } from "lucide-react";
 import { PaymentStatus } from "@/enums";
