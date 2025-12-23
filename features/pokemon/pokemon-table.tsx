@@ -6,7 +6,14 @@ import { PokemonFilters } from "./pokemon-filters"
 import { usePokemonTable } from "../../context/pokemon-context"
 
 export function PokemonTable() {
-  const { items, isLoading, error } = usePokemonTable()
+  const {
+    items,
+    isLoading,
+    error,
+    pagination,
+    pageCount,
+    onPaginationChange,
+  } = usePokemonTable()
 
   return (
     <section className="flex w-full flex-col gap-4">
@@ -23,6 +30,10 @@ export function PokemonTable() {
           columns={pokemonColumns}
           data={items}
           getRowId={(row) => row.key}
+          pagination={pagination}
+          pageCount={pageCount}
+          manualPagination
+          onPaginationChange={onPaginationChange}
         />
       )}
     </section>

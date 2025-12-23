@@ -1,4 +1,10 @@
-import { PokemonListParams, PokemonListResult, pokemonQueryKeys } from "@/types/pokemon.types"
+import { keepPreviousData } from "@tanstack/react-query"
+import {
+  PokemonListParams,
+  PokemonListResult,
+  type PokemonPaginationState,
+  pokemonQueryKeys,
+} from "@/types/pokemon.types"
 import { fetchPokemonList } from "./pokemon.api"
 import { mapPokemonListResponse } from "./pokemon.mapper"
 
@@ -9,7 +15,23 @@ export async function getPokemonList(
   return mapPokemonListResponse(response)
 }
 
-export const getPokemonListQueryOptions = (params: PokemonListParams) => ({
-  queryKey: pokemonQueryKeys.list(params),
-  queryFn: () => getPokemonList(params),
-})
+export function mapPaginationToListParams(
+  pagination: PokemonPaginationState
+): PokemonListParams {
+  return {
+    limit: pagination.pageSize,
+    offset: pagination.pageIndex * pagination.pageSize,
+  }
+}
+
+export const getPokemonListQueryOptions = (
+  pagination: PokemonPaginationState
+) => {
+  const params = mapPaginationToListParams(pagination)
+
+  return {
+    queryKey: pokemonQueryKeys.list(pagination),
+    queryFn: () => getPokemonList(params),
+    placeholderData: keepPreviousData,
+  }
+}

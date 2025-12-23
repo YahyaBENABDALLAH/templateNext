@@ -1,3 +1,5 @@
+import type { PaginationState } from "@tanstack/react-table"
+
 export type PokemonApiListItem = {
   name: string
   url: string
@@ -36,9 +38,16 @@ export type PokemonListFilters = {
   sortDirection: SortDirection
 }
 
+export type PokemonPaginationState = PaginationState
+
 export const DEFAULT_POKEMON_LIST_PARAMS: PokemonListParams = {
-  limit: 150,
+  limit: 20,
   offset: 0,
+}
+
+export const DEFAULT_POKEMON_PAGINATION: PokemonPaginationState = {
+  pageIndex: 0,
+  pageSize: DEFAULT_POKEMON_LIST_PARAMS.limit,
 }
 
 export const DEFAULT_POKEMON_LIST_FILTERS: PokemonListFilters = {
@@ -47,5 +56,6 @@ export const DEFAULT_POKEMON_LIST_FILTERS: PokemonListFilters = {
   sortDirection: "asc",
 }
 export const pokemonQueryKeys = {
-  list: (params: PokemonListParams) => ["pokemon", "list", params] as const,
+  list: (pagination: PokemonPaginationState) =>
+    ["pokemon", "list", pagination.pageIndex, pagination.pageSize] as const,
 }

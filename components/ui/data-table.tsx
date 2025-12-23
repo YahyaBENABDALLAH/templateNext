@@ -2,6 +2,8 @@
 
 import {
   type ColumnDef,
+  type OnChangeFn,
+  type PaginationState,
   type Row,
   flexRender,
   getCoreRowModel,
@@ -24,19 +26,37 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   getRowId?: (originalRow: TData, index: number, parent?: Row<TData>) => string
+  pageCount?: number
+  pagination?: PaginationState
+  manualPagination?: boolean
+  onPaginationChange?: OnChangeFn<PaginationState>
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   getRowId,
+  pageCount,
+  pagination,
+  manualPagination,
+  onPaginationChange,
 }: DataTableProps<TData, TValue>) {
+  // TanStack Table manages its own memoization; React Compiler can skip it.
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns,
     getRowId,
+    state: pagination ? { pagination } : undefined,
+    pageCount,
+    manualPagination,
+    onPaginationChange,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    ...(manualPagination
+      ? {}
+      : {
+          getPaginationRowModel: getPaginationRowModel(),
+        }),
   })
 
   return (
