@@ -96,7 +96,7 @@ const createAxiosInstance = (
               break;
 
             case 404:
-              redirectToNotFound(router);
+              // redirectToNotFound(router);
               break;
 
             case 409:

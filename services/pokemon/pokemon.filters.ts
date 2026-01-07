@@ -9,15 +9,8 @@ function normalize(value: string) {
   return value.trim().toLowerCase()
 }
 
-function compareByKey(a: PokemonListItem, b: PokemonListItem) {
-  const aKey = Number(a.key)
-  const bKey = Number(b.key)
-
-  if (Number.isFinite(aKey) && Number.isFinite(bKey)) {
-    return aKey - bKey
-  }
-
-  return a.key.localeCompare(b.key)
+function compareById(a: PokemonListItem, b: PokemonListItem) {
+  return a.id - b.id
 }
 
 function compareByField(
@@ -25,32 +18,32 @@ function compareByField(
   b: PokemonListItem,
   sortKey: PokemonSortKey
 ) {
-  if (sortKey === "key") {
-    return compareByKey(a, b)
+  if (sortKey === "id") {
+    return compareById(a, b)
   }
 
-  return a[sortKey].localeCompare(b[sortKey])
+  return a.name.localeCompare(b.name)
 }
 
 export function applyPokemonFilters(
   items: PokemonListItem[],
   filters: PokemonListFilters
 ) {
-  const search = normalize(filters.search)
+  const search = normalize(filters.keyword)
 
   const filtered = search
     ? items.filter((item) =>
-        [item.name, item.key, item.url].some((value) =>
+        [item.name, String(item.id)].some((value) =>
           normalize(value).includes(search)
         )
       )
     : items
 
   const sorted = [...filtered].sort((a, b) =>
-    compareByField(a, b, filters.sortKey)
+    compareByField(a, b, filters.sort)
   )
 
-  if (filters.sortDirection === "desc") {
+  if (filters.order === "desc") {
     sorted.reverse()
   }
 

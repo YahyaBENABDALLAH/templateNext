@@ -1,27 +1,51 @@
 import type {
+  PokemonApiDetailResponse,
   PokemonApiListResponse,
+  PokemonApiTypeResponse,
   PokemonListItem,
   PokemonListResult,
 } from "@/types/pokemon.types"
 
-const KEY_MATCHER = /\/pokemon\/(\d+)\/?$/
+const ID_MATCHER = /\/pokemon\/(\d+)\/?$/
 
-function extractPokemonKey(url: string) {
-  const match = url.match(KEY_MATCHER)
-  return match?.[1] ?? url
+function extractPokemonId(url: string) {
+  const match = url.match(ID_MATCHER)
+  if (!match) {
+    return 0
+  }
+
+  const id = Number(match[1])
+  return Number.isFinite(id) ? id : 0
 }
 
 export function mapPokemonListResponse(
   response: PokemonApiListResponse
 ): PokemonListResult {
   const items: PokemonListItem[] = response.results.map((item) => ({
-    key: extractPokemonKey(item.url),
+    id: extractPokemonId(item.url),
     name: item.name,
-    url: item.url,
   }))
 
   return {
     items,
     totalCount: response.count,
+  }
+}
+
+export function mapPokemonTypeResponse(
+  response: PokemonApiTypeResponse
+): PokemonListItem[] {
+  return response.pokemon.map((entry) => ({
+    id: extractPokemonId(entry.pokemon.url),
+    name: entry.pokemon.name,
+  }))
+}
+
+export function mapPokemonDetailResponse(
+  response: PokemonApiDetailResponse
+): PokemonListItem {
+  return {
+    id: response.id,
+    name: response.name,
   }
 }
