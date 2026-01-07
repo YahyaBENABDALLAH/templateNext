@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { MultiSelect } from "@/components/ui/select/multi-select";
@@ -42,11 +42,12 @@ function TypeMultiSelect({ value, onChange }: TypeMultiSelectProps) {
       <Label>Types</Label>
       <div className="flex items-center gap-2">
         <MultiSelect
+          singleLine={false}
+          maxCount={2}
           options={options}
           onValueChange={(values) => onChange(sanitizeValues(values))}
           defaultValue={value}
           placeholder="All types"
-          searchable={false}
         />
       </div>
     </div>
@@ -58,10 +59,7 @@ type PokemonControlsProps = {
   onUpdate: (updates: PokemonQueryUpdate) => void;
 };
 
-export function PokemonControls({
-  query,
-  onUpdate,
-}: PokemonControlsProps) {
+export function PokemonControls({ query, onUpdate }: PokemonControlsProps) {
   return (
     <section className="mt-4 grid gap-4 rounded-md border p-4 sm:grid-cols-2 lg:grid-cols-5">
       <div className="space-y-2">
@@ -70,18 +68,14 @@ export function PokemonControls({
           id="pokemon-keyword"
           placeholder="Search by name or ID"
           value={query.keyword}
-          onChange={(event) =>
-            onUpdate({ keyword: event.target.value })
-          }
+          onChange={(event) => onUpdate({ keyword: event.target.value })}
         />
       </div>
       <div className="space-y-2">
         <Label>Sort by</Label>
         <Select
           value={query.sort}
-          onValueChange={(value) =>
-            onUpdate({ sort: value as PokemonSortKey })
-          }
+          onValueChange={(value) => onUpdate({ sort: value as PokemonSortKey })}
         >
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Sort by" />

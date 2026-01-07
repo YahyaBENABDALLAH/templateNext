@@ -47,7 +47,7 @@ export interface AnimationConfig {
  * Variants for the multi-select component to handle different styles.
  * Uses class-variance-authority (cva) to define different styles based on "variant" prop.
  */
-const multiSelectVariants = cva(" transition-all duration-300 ease-in-out", {
+const multiSelectVariants = cva("m-1 transition-all duration-300 ease-in-out", {
 	variants: {
 		variant: {
 			default: "border-foreground/10 text-foreground bg-card hover:bg-card/80",
@@ -806,7 +806,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 								getAllOptions().length
 							} options selected. ${placeholder}`}
 							className={cn(
-								"flex p-1 rounded-md border min-h-9 h-auto shadow-xs items-center justify-between bg-inherit hover:bg-inherit [&_svg]:pointer-events-auto",
+								"flex p-1 rounded-md border min-h-9 shadow-xs h-auto items-center justify-between bg-inherit hover:bg-inherit [&_svg]:pointer-events-auto",
 								autoSize ? "w-auto" : "w-full",
 								responsiveSettings.compactMode && "min-h-8 text-sm",
 								screenSize === "mobile" && "min-h-12 text-base",
@@ -875,7 +875,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 																animationConfig?.duration || animation
 															}s`,
 															animationDelay: `${animationConfig?.delay || 0}s`,
-														}}>
+														}} rightIcon={<>
 														{IconComponent && !responsiveSettings.hideIcons && (
 															<IconComponent
 																className={cn(
@@ -921,7 +921,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 																		"h-2.5 w-2.5"
 																)}
 															/>
-														</div>
+														</div></>}>
 													</Badge>
 												);
 											})
@@ -942,8 +942,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 														animationConfig?.duration || animation
 													}s`,
 													animationDelay: `${animationConfig?.delay || 0}s`,
-												}}>
-												{`+ ${
+												}} rightIcon={<>{`+ ${
 													selectedValues.length - responsiveSettings.maxCount
 												} more`}
 												<XCircle
@@ -955,7 +954,8 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 														event.stopPropagation();
 														clearExtraOptions();
 													}}
-												/>
+												/></>}>
+												
 											</Badge>
 										)}
 									</div>
