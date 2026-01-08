@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query"
 import { getPokemonListQueryOptions } from "@/services/pokemon/pokemon.queries"
 import { PokemonTable } from "@/components/features/pokemon/pokemon-table"
 import { PokemonControls } from "./pokemon-controls"
-import { PokemonPagination } from "./pokemon-pagination"
+ 
 import {
   applyPokemonQueryUpdate,
   buildPokemonUrl,
@@ -43,12 +43,6 @@ export function PokemonPageClient({ query }: PokemonPageClientProps) {
           {data.totalCount} Pokemon
         </div>
         <PokemonTable data={data.items} />
-        <PokemonPagination
-          page={query.page}
-          pageSize={query.pageSize}
-          totalCount={data.totalCount}
-          onPageChange={(page) => updateQuery({ page })}
-        />
       </div>
     )
   }
