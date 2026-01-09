@@ -12,7 +12,7 @@ const NOT_FOUND_ROUTE = '/not-found';
 
 let refreshingPromise: Promise<void> | null = null;
 
-const startRefreshing = (runner: () => Promise<any>) => {
+const startRefreshing = (runner: () => Promise<void>) => {
   if (!refreshingPromise) {
     refreshingPromise = runner()
       .then(() => {})

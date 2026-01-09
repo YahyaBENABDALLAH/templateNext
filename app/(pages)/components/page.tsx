@@ -163,7 +163,7 @@ const ComponentsPage = () => {
                 </p>
               </div>
               <div className="space-y-1">
-                <p className="text-base leading-[var(--line-height-base)]">
+                <p className="text-base leading-(--line-height-base">
                   Body / default paragraph
                 </p>
                 <p className="text-sm text-muted-foreground">
