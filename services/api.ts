@@ -131,3 +131,6 @@ export const authAxios = createAxiosInstance(process.env.NEXT_PUBLIC_USER_MANAGE
 export const pokemonAxios = createAxiosInstance(process.env.NEXT_PUBLIC_POKEMON_API_URL, {
   withCredentials: false,
 });
+export const digimonAxios = createAxiosInstance(process.env.NEXT_PUBLIC_DIGIMON_API_URL, {
+  withCredentials: false,
+});
