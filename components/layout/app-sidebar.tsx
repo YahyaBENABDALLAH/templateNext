@@ -14,8 +14,8 @@ import {
   Star,
 } from "lucide-react";
 
-import { NavMain } from "@/components/features/navigation/nav-main";
-import { NavProjects } from "@/components/features/navigation/nav-projects";
+import { NavMain } from "@/features/navigation/nav-main";
+import { NavProjects } from "@/features/navigation/nav-projects";
 import { NavUser } from "@/components/nav-user";
 import { SidebarBrand } from "@/components/sidebar-brand";
 import { Badge } from "@/components/ui/badge";

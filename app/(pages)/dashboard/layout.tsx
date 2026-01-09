@@ -1,4 +1,4 @@
-import { DashboardOverview } from "@/components/features/dashboard/dashboard-overview";
+import { DashboardOverview } from "@/features/dashboard/dashboard-overview";
 import { Button } from "@/components/ui/button";
 import { Download, Filter, Plus } from "lucide-react";
 import { ReactNode } from "react";

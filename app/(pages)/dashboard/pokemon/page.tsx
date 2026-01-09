@@ -1,5 +1,5 @@
-import { parsePokemonSearchParams } from "./pokemon-search-params";
-import { PokemonPageClient } from "./pokemon-page-client";
+import { parsePokemonSearchParams } from "../../../../features/pokemon/pokemon-search-params";
+import { PokemonPageClient } from "../../../../features/pokemon/pokemon-page-client";
 
 type PokemonPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;

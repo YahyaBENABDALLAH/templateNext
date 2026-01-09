@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { AppSidebar } from "@/components/layout/app-sidebar";
-import { LanguageSwitcher } from "@/components/features/global/language-switcher";
-import { ThemeToggle } from "@/components/features/global/theme-toggle";
+import { LanguageSwitcher } from "@/features/global/language-switcher";
+import { ThemeToggle } from "@/features/global/theme-toggle";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,7 +11,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { HeaderSearch } from "@/components/features/global/header-search";
+import { HeaderSearch } from "@/features/global/header-search";
 import { Home } from "lucide-react";
 
 export default function AuthenticatedLayout({

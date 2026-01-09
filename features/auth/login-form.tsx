@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/context/i18n.context";
-import { AuthHeader } from "@/components/features/auth/auth-header";
+import { AuthHeader } from "@/features/auth/auth-header";
 
 export function LoginForm({
   className,

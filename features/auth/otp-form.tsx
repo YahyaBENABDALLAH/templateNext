@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/input-otp";
 import { useI18n } from "@/context/i18n.context";
 import { cn } from "@/lib/utils";
-import { AuthHeader } from "@/components/features/auth/auth-header";
+import { AuthHeader } from "@/features/auth/auth-header";
 
 type OTPFormProps = React.ComponentProps<"div"> & {
   email?: string;

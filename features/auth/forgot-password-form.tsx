@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { AuthHeader } from "@/components/features/auth/auth-header";
+import { AuthHeader } from "@/features/auth/auth-header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useI18n } from "@/context/i18n.context";

@@ -6,16 +6,6 @@ import type {
 
 export const POKEMON_ROUTE = "/dashboard/pokemon";
 
-export const POKEMON_QUERY_KEYS = [
-  "page",
-  "pageSize",
-  "keyword",
-  "sort",
-  "order",
-  "type",
-] as const;
-export type PokemonQueryKey = (typeof POKEMON_QUERY_KEYS)[number];
-
 export const POKEMON_PAGE_MIN = 1;
 export const POKEMON_PAGE_SIZES = [10, 20, 50] as const;
 export type PokemonPageSize = (typeof POKEMON_PAGE_SIZES)[number];
@@ -62,41 +52,19 @@ export const POKEMON_QUERY_DEFAULTS: PokemonQueryState = {
   types: [],
 };
 
-type SearchParamsLike = {
-  get: (key: string) => string | null;
-};
+export type PokemonSearchParams = Partial<
+  Record<
+    "page" | "pageSize" | "keyword" | "sort" | "order" | "type",
+    string | string[]
+  >
+>;
 
-export type PokemonSearchParams =
-  | Record<string, string | string[] | undefined>
-  | SearchParamsLike;
-
-const readParam = (
+const getParam = (
   searchParams: PokemonSearchParams,
-  key: PokemonQueryKey,
+  key: keyof PokemonSearchParams,
 ): string | undefined => {
-  if (typeof (searchParams as SearchParamsLike).get === "function") {
-    const value = (searchParams as SearchParamsLike).get(key);
-    return value ?? undefined;
-  }
-
   const value = searchParams[key];
-  if (Array.isArray(value)) {
-    return value[0];
-  }
-  return value;
-};
-
-const parseIntegerParam = (value: string | undefined): number | undefined => {
-  if (!value) {
-    return undefined;
-  }
-
-  const numberValue = Number(value);
-  if (!Number.isInteger(numberValue)) {
-    return undefined;
-  }
-
-  return numberValue;
+  return Array.isArray(value) ? value[0] : value;
 };
 
 const parseEnumParam = <T extends string>(
@@ -111,17 +79,8 @@ const parseEnumParam = <T extends string>(
   return allowed.includes(normalized as T) ? (normalized as T) : undefined;
 };
 
-const parseKeywordParam = (value: string | undefined): string => {
-  if (!value) {
-    return "";
-  }
-
-  return value.trim();
-};
-
 const parseTypeListParam = (
   value: string | undefined,
-  allowed: readonly PokemonTypeFilter[],
 ): PokemonTypeFilter[] => {
   if (!value) {
     return [];
@@ -132,7 +91,7 @@ const parseTypeListParam = (
     .split(",")
     .map((entry) => entry.trim().toLowerCase())
     .filter((entry): entry is PokemonTypeFilter =>
-      allowed.includes(entry as PokemonTypeFilter),
+      POKEMON_TYPES.includes(entry as PokemonTypeFilter),
     )
     .forEach((entry) => unique.add(entry));
 
@@ -142,35 +101,42 @@ const parseTypeListParam = (
 export const parsePokemonSearchParams = (
   searchParams: PokemonSearchParams,
 ): PokemonQueryState => {
-  const pageValue = parseIntegerParam(readParam(searchParams, "page"));
-  const pageSizeValue = parseIntegerParam(readParam(searchParams, "pageSize"));
-  const keyword = parseKeywordParam(readParam(searchParams, "keyword"));
+  const toInt = (value: string | undefined) => {
+    if (!value) {
+      return undefined;
+    }
+
+    const numberValue = Number(value);
+    return Number.isInteger(numberValue) ? numberValue : undefined;
+  };
+
+  const pageValue = toInt(getParam(searchParams, "page"));
+  const pageSizeValue = toInt(getParam(searchParams, "pageSize"));
+  const keyword = (getParam(searchParams, "keyword") ?? "").trim();
   const sortValue = parseEnumParam(
-    readParam(searchParams, "sort"),
+    getParam(searchParams, "sort"),
     POKEMON_SORT_KEYS,
   );
   const orderValue = parseEnumParam(
-    readParam(searchParams, "order"),
+    getParam(searchParams, "order"),
     POKEMON_SORT_ORDERS,
   );
-  const typesValue = parseTypeListParam(
-    readParam(searchParams, "type"),
-    POKEMON_TYPES,
-  );
+  const typesValue = parseTypeListParam(getParam(searchParams, "type"));
+  const defaults = POKEMON_QUERY_DEFAULTS;
 
   return {
     page:
       pageValue !== undefined && pageValue >= POKEMON_PAGE_MIN
         ? pageValue
-        : POKEMON_QUERY_DEFAULTS.page,
+        : defaults.page,
     pageSize:
       pageSizeValue !== undefined &&
       POKEMON_PAGE_SIZES.includes(pageSizeValue as PokemonPageSize)
         ? (pageSizeValue as PokemonPageSize)
-        : POKEMON_QUERY_DEFAULTS.pageSize,
+        : defaults.pageSize,
     keyword,
-    sort: sortValue ?? POKEMON_QUERY_DEFAULTS.sort,
-    order: orderValue ?? POKEMON_QUERY_DEFAULTS.order,
+    sort: sortValue ?? defaults.sort,
+    order: orderValue ?? defaults.order,
     types: typesValue,
   };
 };
@@ -212,29 +178,24 @@ export const buildPokemonSearchParams = (
 ): URLSearchParams => {
   const { omitDefaults = true } = options;
   const params = new URLSearchParams();
+  const defaults = POKEMON_QUERY_DEFAULTS;
   const keyword = state.keyword.trim();
 
-  const shouldInclude = <T,>(value: T, fallback: T) =>
-    !omitDefaults || value !== fallback;
+  const entries: Array<[string, string | number, string | number]> = [
+    ["page", state.page, defaults.page],
+    ["pageSize", state.pageSize, defaults.pageSize],
+    ["sort", state.sort, defaults.sort],
+    ["order", state.order, defaults.order],
+  ];
 
-  if (shouldInclude(state.page, POKEMON_QUERY_DEFAULTS.page)) {
-    params.set("page", String(state.page));
+  for (const [key, value, fallback] of entries) {
+    if (!omitDefaults || value !== fallback) {
+      params.set(key, String(value));
+    }
   }
 
-  if (shouldInclude(state.pageSize, POKEMON_QUERY_DEFAULTS.pageSize)) {
-    params.set("pageSize", String(state.pageSize));
-  }
-
-  if (keyword && shouldInclude(keyword, POKEMON_QUERY_DEFAULTS.keyword)) {
+  if (keyword && (!omitDefaults || keyword !== defaults.keyword)) {
     params.set("keyword", keyword);
-  }
-
-  if (shouldInclude(state.sort, POKEMON_QUERY_DEFAULTS.sort)) {
-    params.set("sort", state.sort);
-  }
-
-  if (shouldInclude(state.order, POKEMON_QUERY_DEFAULTS.order)) {
-    params.set("order", state.order);
   }
 
   if (state.types.length > 0) {

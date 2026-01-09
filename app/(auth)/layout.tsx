@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { LanguageSwitcher } from "@/components/features/global/language-switcher";
-import { ThemeToggle } from "@/components/features/global/theme-toggle";
+import { LanguageSwitcher } from "@/features/global/language-switcher";
+import { ThemeToggle } from "@/features/global/theme-toggle";
 export const metadata: Metadata = {
   title: "BKAM Fleet Management",
   description: "BKAM Fleet Management",

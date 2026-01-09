@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import type { OnChangeFn, SortingState } from "@tanstack/react-table"
 import { getPokemonListQueryOptions } from "@/services/pokemon/pokemon.queries"
-import { PokemonTable } from "@/components/features/pokemon/pokemon-table"
 import { PokemonControls } from "./pokemon-controls"
  
 import {
@@ -15,6 +14,7 @@ import {
   type PokemonQueryUpdate,
 } from "./pokemon-search-params"
 import type { PokemonSortKey } from "@/types/pokemon.types"
+import { PokemonTable } from "./pokemon-table"
 
 type PokemonPageClientProps = {
   query: PokemonQueryState

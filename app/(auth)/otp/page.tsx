@@ -1,5 +1,5 @@
 "use client";
-import { OTPForm } from "@/components/features/auth/otp-form";
+import { OTPForm } from "@/features/auth/otp-form";
 
 export default function OTPPage() {
   return (
