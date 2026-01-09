@@ -1,7 +1,10 @@
 "use client"
 
+import * as React from "react"
 import {
-  type ColumnDef,
+  type OnChangeFn,
+  type RowSelectionState,
+  type SortingState,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -15,31 +18,36 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-
-const columns: ColumnDef<PokemonListItem>[] = [
-  {
-    accessorKey: "id",
-    header: "ID",
-    cell: ({ getValue }) => `#${getValue<number>()}`,
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-    cell: ({ getValue }) => String(getValue<string>()),
-  },
-]
+import { columns } from "./columns"
 
 type PokemonTableProps = {
   data: PokemonListItem[]
+  sorting: SortingState
+  onSortingChange: OnChangeFn<SortingState>
   onRowClick?: (row: PokemonListItem) => void
 }
 
-export function PokemonTable({ data, onRowClick }: PokemonTableProps) {
+export function PokemonTable({
+  data,
+  sorting,
+  onSortingChange,
+  onRowClick,
+}: PokemonTableProps) {
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
+
   const table = useReactTable({
     data,
     columns,
     getRowId: (row) => String(row.id),
     getCoreRowModel: getCoreRowModel(),
+    manualSorting: true,
+    onSortingChange,
+    onRowSelectionChange: setRowSelection,
+    enableRowSelection: true,
+    state: {
+      sorting,
+      rowSelection,
+    },
   })
 
   return (
@@ -66,6 +74,7 @@ export function PokemonTable({ data, onRowClick }: PokemonTableProps) {
             <TableRow
               key={row.id}
               className={onRowClick ? "cursor-pointer" : undefined}
+              data-state={row.getIsSelected() ? "selected" : undefined}
               onClick={onRowClick ? () => onRowClick(row.original) : undefined}
             >
               {row.getVisibleCells().map((cell) => (

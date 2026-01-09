@@ -1,7 +1,9 @@
 "use client"
 
+import * as React from "react"
 import { useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
+import type { OnChangeFn, SortingState } from "@tanstack/react-table"
 import { getPokemonListQueryOptions } from "@/services/pokemon/pokemon.queries"
 import { PokemonTable } from "@/components/features/pokemon/pokemon-table"
 import { PokemonControls } from "./pokemon-controls"
@@ -12,6 +14,7 @@ import {
   type PokemonQueryState,
   type PokemonQueryUpdate,
 } from "./pokemon-search-params"
+import type { PokemonSortKey } from "@/types/pokemon.types"
 
 type PokemonPageClientProps = {
   query: PokemonQueryState
@@ -23,10 +26,36 @@ export function PokemonPageClient({ query }: PokemonPageClientProps) {
     getPokemonListQueryOptions(query)
   )
 
-  const updateQuery = (updates: PokemonQueryUpdate) => {
-    const next = applyPokemonQueryUpdate(query, updates)
-    router.replace(buildPokemonUrl(next))
-  }
+  const updateQuery = React.useCallback(
+    (updates: PokemonQueryUpdate) => {
+      const next = applyPokemonQueryUpdate(query, updates)
+      router.replace(buildPokemonUrl(next))
+    },
+    [query, router]
+  )
+
+  const sorting = React.useMemo<SortingState>(
+    () => [{ id: query.sort, desc: query.order === "desc" }],
+    [query.order, query.sort]
+  )
+
+  const handleSortingChange = React.useCallback<OnChangeFn<SortingState>>(
+    (updater) => {
+      const nextSorting =
+        typeof updater === "function" ? updater(sorting) : updater
+      const next = nextSorting[0]
+
+      if (!next) {
+        return
+      }
+
+      updateQuery({
+        sort: next.id as PokemonSortKey,
+        order: next.desc ? "desc" : "asc",
+      })
+    },
+    [sorting, updateQuery]
+  )
 
   let content = null
 
@@ -42,7 +71,11 @@ export function PokemonPageClient({ query }: PokemonPageClientProps) {
         <div className="text-sm text-slate-600">
           {data.totalCount} Pokemon
         </div>
-        <PokemonTable data={data.items} />
+        <PokemonTable
+          data={data.items}
+          sorting={sorting}
+          onSortingChange={handleSortingChange}
+        />
       </div>
     )
   }

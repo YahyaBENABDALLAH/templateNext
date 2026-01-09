@@ -128,7 +128,6 @@ const createAxiosInstance = (
 export const authAxios = createAxiosInstance(process.env.NEXT_PUBLIC_USER_MANAGEMENT_URL + '/auth', {
   skipInterceptor: true,
 });
-export const routeAxios = createAxiosInstance(process.env.NEXT_PUBLIC_ROUTE_API_URL);
 export const pokemonAxios = createAxiosInstance(process.env.NEXT_PUBLIC_POKEMON_API_URL, {
   withCredentials: false,
 });
