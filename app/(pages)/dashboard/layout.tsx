@@ -10,7 +10,7 @@ export default function Page({
 }) {
 
   return (
-    <main className="px-4">
+    <div className="px-4">
       <div className="flex justify-end gap-2">
         <Button variant="secondary" leftIcon={<Filter />}>
           Filtres avancés
@@ -22,6 +22,6 @@ export default function Page({
       </div>
       <DashboardOverview />
       {children}
-    </main>
+    </div>
   );
 }

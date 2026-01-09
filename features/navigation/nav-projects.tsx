@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+
 import { Folder, Forward, MoreHorizontal, Trash2 } from "lucide-react"
 
 import {
@@ -50,10 +52,13 @@ export function NavProjects({ projects }: NavProjectsProps) {
           return (
             <SidebarMenuItem key={key}>
               <SidebarMenuButton asChild tooltip={label} badge={item.badge}>
-                <a href={item.url} className="font-semibold text-sm">
-                  <item.icon  strokeWidth={2.5} className="text-muted-foreground/80"/>
+                <Link href={item.url} className="font-semibold text-sm">
+                  <item.icon
+                    strokeWidth={2.5}
+                    className="text-muted-foreground/80"
+                  />
                   <span>{label}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

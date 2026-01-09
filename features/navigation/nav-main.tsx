@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+
 import {
   Collapsible,
   CollapsibleContent,
@@ -52,10 +54,18 @@ export function NavMain({ items }: NavMainProps) {
               showChevron={hasChildren}
               badge={item.badge}
             >
-              <a href={item.url} className="font-semibold text-sm">
-                {item.icon && <item.icon strokeWidth={2.5} className="text-muted-foreground/80"/>}
+              <Link
+                href={item.url}
+                className="font-semibold text-sm"
+              >
+                {item.icon && (
+                  <item.icon
+                    strokeWidth={2.5}
+                    className="text-muted-foreground/80"
+                  />
+                )}
                 <span>{label}</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           )
 
@@ -85,9 +95,9 @@ export function NavMain({ items }: NavMainProps) {
                             asChild
                             isActive={subItem.isActive}
                           >
-                            <a href={subItem.url}>
+                            <Link href={subItem.url}>
                               <span>{subLabel}</span>
-                            </a>
+                            </Link>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       )

@@ -2,7 +2,10 @@
 
 import { isServer, QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { PropsWithChildren } from "react"
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+
+const isDevelopment = process.env.NODE_ENV === "development"
+
 function createQueryClient() {
   return new QueryClient({
     defaultOptions: {
@@ -19,8 +22,10 @@ let browserQueryClient: QueryClient | null = null
 
 function getQueryClient() {
   if (isServer) {
-    // new client per request on the server
-    console.log("SSR")
+    if (isDevelopment) {
+      console.log("SSR")
+    }
+
     return createQueryClient()
   }
 
@@ -34,5 +39,10 @@ function getQueryClient() {
 export function ReactQueryProvider({ children }: PropsWithChildren<unknown>) {
   const queryClient = getQueryClient()
 
-  return <QueryClientProvider client={queryClient}><ReactQueryDevtools initialIsOpen={false} />{children}</QueryClientProvider>
+  return (
+    <QueryClientProvider client={queryClient}>
+      {isDevelopment && <ReactQueryDevtools initialIsOpen={false} />}
+      {children}
+    </QueryClientProvider>
+  )
 }
