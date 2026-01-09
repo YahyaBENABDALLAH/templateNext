@@ -69,7 +69,6 @@ export function DigimonPageClient({ query }: DigimonPageClientProps) {
   } else {
     content = (
       <div className="space-y-2">
-        <div className="text-sm text-slate-600">{data.totalCount} Digimon</div>
         <DigimonTable
           data={data.items}
           sorting={sorting}

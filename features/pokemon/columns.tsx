@@ -1,5 +1,4 @@
 import type { ColumnDef } from "@tanstack/react-table"
-
 import { Checkbox } from "@/components/ui/checkbox"
 import { DataTableColumnHeader } from "@/components/ui/DataTableColumnHeader"
 import type { PokemonListItem } from "@/types/pokemon.types"

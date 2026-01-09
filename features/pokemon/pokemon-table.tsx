@@ -20,6 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { columns } from "./columns"
+import { Download } from "lucide-react"
 
 type PokemonTableProps = {
   data: PokemonListItem[]
@@ -74,8 +75,9 @@ export function PokemonTable({
           variant="primary"
           disabled={!hasSelection}
           onClick={handlePrimaryClick}
+          rightIcon={<Download size={4} />}
         >
-          Primary action
+          Export
         </Button>
       </div>
       <div className="overflow-hidden rounded-md border">
